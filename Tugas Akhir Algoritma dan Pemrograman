@@ -1,0 +1,181 @@
+#include <stdio.h>
+#include <stdlib.h>  // Untuk system("cls") untuk membersihkan layar di Windows
+
+Nama : Rahmat Hidayattulloh 
+Nim : 12250514458
+
+int main() {
+    int correct_pin = 1234;  // 
+    int entered_pin;
+    float balance = 1000.0;  // 
+    int pilihan;
+    int lanjut_transaksi;
+
+    while (1) {
+        system("cls");  
+        printf("=================================\n");
+        printf("         MESIN ATM RAHMAT        \n");
+        printf("=================================\n");
+        printf("Masukkan PIN: ");
+        scanf("%d", &entered_pin);
+        printf("\n");
+
+        if (entered_pin == correct_pin) {
+            printf("PIN yang dimasukkan benar\n");
+            printf("\nTekan Enter untuk melanjutkan...");
+            while (getchar() != '\n');  
+            getchar();  
+
+            while (1) {
+                system("cls");  
+                printf("=================================\n");
+                printf("         MESIN ATM RAHMAT        \n");
+                printf("=================================\n");
+                printf("1. Cek Saldo\n");
+                printf("2. Tarik Tunai\n");
+                printf("3. Setor Tunai\n");
+                printf("4. Top Up\n");
+                printf("5. Logout\n");
+                printf("Masukkan pilihan (1-5): ");
+                scanf("%d", &pilihan);
+
+                system("cls");  
+
+                switch (pilihan) {
+                    case 1:
+                        printf("Saldo Anda adalah: %.2f\n", balance);
+                        break;
+                    case 2: {
+                        float tarik;
+                        printf("Masukkan jumlah uang yang ingin ditarik: ");
+                        scanf("%f", &tarik);
+                        if (tarik <= balance) {
+                            balance -= tarik;
+                            printf("Penarikan berhasil. Saldo Anda sekarang: %.2f\n", balance);
+                        } else {
+                            printf("Saldo tidak cukup.\n");
+                        }
+                        break;
+                    }
+                    case 3: {
+                        float setor;
+                        printf("Masukkan jumlah uang yang ingin disetor: ");
+                        scanf("%f", &setor);
+                        balance += setor;
+                        printf("Setoran berhasil. Saldo Anda sekarang: %.2f\n", balance);
+                        break;
+                    }
+                    case 4: {
+                        int topUpChoice;
+                        float topUp;
+                        char phoneNumber[15];
+                        while (1) {
+                            system("cls");  
+                            printf("=================================\n");
+                            printf("             TOP UP              \n");
+                            printf("=================================\n");
+                            printf("1. Top Up Dana\n");
+                            printf("2. Top Up GoPay\n");
+                            printf("3. Top Up OVO\n");
+                            printf("4. Kembali ke Menu Utama\n");
+                            printf("Masukkan pilihan (1-4): ");
+                            scanf("%d", &topUpChoice);
+
+                            system("cls");  
+
+                            switch (topUpChoice) {
+                                case 1:
+                                    printf("Anda memilih Top Up Dana.\n");
+                                    printf("Masukkan nomor telepon: ");
+                                    scanf("%s", phoneNumber);
+                                    printf("Masukkan jumlah uang untuk Top Up Dana: ");
+                                    scanf("%f", &topUp);
+                                    if (topUp <= balance) {
+                                        balance -= topUp;
+                                        printf("Top Up Dana ke nomor %s berhasil. Saldo Anda sekarang: %.2f\n", phoneNumber, balance);
+                                    } else {
+                                        printf("Saldo tidak cukup.\n");
+                                    }
+                                    printf("\nTekan Enter untuk melanjutkan...");
+                                    while (getchar() != '\n');  
+                                    getchar();  
+                                    break;
+                                case 2:
+                                    printf("Anda memilih Top Up GoPay.\n");
+                                    printf("Masukkan nomor telepon: ");
+                                    scanf("%s", phoneNumber);
+                                    printf("Masukkan jumlah uang untuk Top Up GoPay: ");
+                                    scanf("%f", &topUp);
+                                    if (topUp <= balance) {
+                                        balance -= topUp;
+                                        printf("Top Up GoPay ke nomor %s berhasil. Saldo Anda sekarang: %.2f\n", phoneNumber, balance);
+                                    } else {
+                                        printf("Saldo tidak cukup.\n");
+                                    }
+                                    printf("\nTekan Enter untuk melanjutkan...");
+                                    while (getchar() != '\n');  
+                                    getchar();  
+                                    break;
+                                case 3:
+                                    printf("Anda memilih Top Up OVO.\n");
+                                    printf("Masukkan nomor telepon: ");
+                                    scanf("%s", phoneNumber);
+                                    printf("Masukkan jumlah uang untuk Top Up OVO: ");
+                                    scanf("%f", &topUp);
+                                    if (topUp <= balance) {
+                                        balance -= topUp;
+                                        printf("Top Up OVO ke nomor %s berhasil. Saldo Anda sekarang: %.2f\n", phoneNumber, balance);
+                                    } else {
+                                        printf("Saldo tidak cukup.\n");
+                                    }
+                                    printf("\nTekan Enter untuk melanjutkan...");
+                                    while (getchar() != '\n');  
+                                    getchar();  
+                                    break;
+                                case 4:
+                                    break;
+                                default:
+                                    printf("Pilihan tidak valid!\n");
+                                    printf("\nTekan Enter untuk melanjutkan...");
+                                    while (getchar() != '\n');  
+                                    getchar();  
+                                    break;
+                            }
+
+                            if (topUpChoice == 4) {
+                                break;  
+                            }
+                        }
+                        break;
+                    }
+                    case 5:
+                        printf("Logout berhasil.\n");
+                        break;
+                    default:
+                        printf("Pilihan tidak valid!\n");
+                        break;
+                }
+
+                if (pilihan == 5) {
+                    break;
+                }
+
+                printf("\nApakah Anda ingin melakukan transaksi lain?\n");
+                printf("1. Ya\n");
+                printf("2. Tidak\n");
+                printf("Pilih (1-2): ");
+                scanf("%d", &lanjut_transaksi);
+                if (lanjut_transaksi == 2) {
+                    break;
+                }
+            }
+        } else {
+            printf("PIN yang dimasukkan salah\n");
+            printf("\nTekan Enter untuk mencoba lagi...");
+            while (getchar() != '\n');  
+            getchar();  
+        }
+    }
+
+    return 0;
+}
